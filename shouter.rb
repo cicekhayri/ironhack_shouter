@@ -15,8 +15,15 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 8 }
 end
 
-class Shouter < ActiveRecord::Base
+class Shout < ActiveRecord::Base
   belongs_to :user
+
+  validates :message, presence: true, allow_nil: false, allow_blank: false, 
+            length: { in: 1...200 }
+  validates :created_at, presence: true
+
+  validates :likes, numericality: true
+
 end
 
 get '/' do
