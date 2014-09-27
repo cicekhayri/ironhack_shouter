@@ -13,7 +13,14 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, allow_nil: false, allow_blank: false 
   validates :handle, presence: true, uniqueness: true, allow_nil: false, allow_blank: false
-  validates :password, presence: true, length: { minimum: 8 }
+  validates :password, presence: true, length: { minimum: 8, maximum: 20 }
+  before_save :random_password
+
+  def random_password(size = 20)
+    charset = %w{ 2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z}
+    (8...size).map{ charset.to_a[rand(charset.size)] }.join.downcase
+  end
+
 end
 
 class Shout < ActiveRecord::Base
@@ -45,9 +52,11 @@ post '/' do
   if shout.save
     redirect '/'
   else
-    "OOOOPPPPSSS there was an error"
+    @errors = shout.errors
+    erb :data_not_valid
+    
   end
-  
+
 end
 
 get '/like/:id' do
