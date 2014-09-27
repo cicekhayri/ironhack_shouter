@@ -12,10 +12,10 @@ ActiveRecord::Base.establish_connection(
 class User < ActiveRecord::Base
   has_many :shouts
 
-  validates :name, presence: true, allow_nil: false, allow_blank: false 
-  validates :handle, presence: true, uniqueness: true, allow_nil: false, allow_blank: false
+  validates :name, presence: true 
+  validates :handle, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8, maximum: 20 }
-  before_save :random_password
+  before_create :random_password
 
   def random_password(size = 20)
     charset = %w{ 2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z}
@@ -44,7 +44,7 @@ end
 
 post '/' do
   shout = Shout.new
-  shout.created_at = Date.today
+  shout.created_at = Time.now
   shout.message = params[:text]
   user = User.find_by_password(params[:password])
   shout.user_id = user.id
