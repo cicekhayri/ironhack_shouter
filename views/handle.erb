@@ -1,0 +1,9 @@
+<h3>All users</h3>
+
+<% @user.each do |user| %>
+  <ul class="user-list">
+    <li><a href="/handle/<%= user.id %>"><%= user.handle %></a></li>
+  </ul>
+
+<% end %>
+

@@ -36,9 +36,6 @@ end
 
 post '/' do
   shout = Shout.new
-  #user = User.new
-  #shout.user_id = params[:password]
-  #shout = user
   shout.created_at = Date.today
   shout.message = params[:text]
   user = User.find_by_password(params[:password])
@@ -63,6 +60,24 @@ get '/dislike/:id' do
   @shout = Shout.find(params[:id])
   @shout.decrement!(:likes)
   redirect '/'
+end
+
+get '/best' do
+  @shout = Shout.order(likes: :desc)
+
+  erb :best
+end
+
+get '/handle' do
+  @user = User.all
+  erb :handle
+end
+
+get '/handle/:id' do
+  @user = User.find(params[:id])
+  @shout = Shout.where(:user_id => params[:id])
+
+  erb :handle_user
 end
 
 private

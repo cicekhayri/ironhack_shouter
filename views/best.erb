@@ -1,0 +1,9 @@
+<h3>The best shout</h3>
+
+<% @shout.each do |shout| %>
+  <ul class="ul-one">
+    <li><%= shout.message %>
+  <br/><br/><small>number of likes: <%= shout.likes %></small></li>
+  </ul>
+<% end %>
+
