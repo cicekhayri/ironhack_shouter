@@ -52,3 +52,25 @@ post '/' do
   end
   
 end
+
+get '/like/:id' do
+  @shout = Shout.find(params[:id])
+  @shout.increment!(:likes)
+  redirect '/'
+end
+
+get '/dislike/:id' do
+  @shout = Shout.find(params[:id])
+  @shout.decrement!(:likes)
+  redirect '/'
+end
+
+private
+def decrement
+  update_attributes(:likes => likes - 1)
+end
+
+def increment
+  update_attributes(:likes => likes + 1)
+end
+
