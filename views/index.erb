@@ -1,0 +1,12 @@
+<h1>Index</h1>
+
+<form action="/" method="post">
+  <input name="text">
+  <input type="password" name="password">
+  <input type="submit" value="SHOUT!!!">
+</form>
+
+
+  <% @shout.each do |shout| %>
+    <%= shout.message %>
+  <% end %>

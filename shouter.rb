@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'active_record'
 require 'sinatra'
+require 'sinatra/reloader'
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
@@ -8,7 +9,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 class User < ActiveRecord::Base
-  has_many :shouters
+  has_many :shouts
 
   validates :name, presence: true, allow_nil: false, allow_blank: false 
   validates :handle, presence: true, uniqueness: true, allow_nil: false, allow_blank: false
@@ -16,7 +17,7 @@ class User < ActiveRecord::Base
 end
 
 class Shout < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :users
 
   validates :message, presence: true, allow_nil: false, allow_blank: false, 
             length: { in: 1...200 }
@@ -27,9 +28,26 @@ class Shout < ActiveRecord::Base
 end
 
 get '/' do
-
+  @shout = Shout.order(id: :desc)
+  
+  erb :index
 end
 
-get '/new_user' do
- 
+post '/' do
+  shout = Shout.new
+  #user = User.new
+  #shout.user_id = params[:password]
+  #shout = user
+  shout.created_at = Date.today
+  shout.message = params[:text]
+  user = User.find_by_password(params[:password])
+  shout.user_id = user.id
+  shout.likes = 0
+
+  if shout.save
+    redirect '/'
+  else
+    "OOOOPPPPSSS there was an error"
+  end
+  
 end
