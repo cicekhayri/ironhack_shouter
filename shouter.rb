@@ -2,6 +2,7 @@ require 'rubygems'
 require 'active_record'
 require 'sinatra'
 require 'sinatra/reloader'
+enable :sessions
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
@@ -26,8 +27,8 @@ end
 class Shout < ActiveRecord::Base
   belongs_to :user
 
-  validates :message, presence: true, allow_nil: false, allow_blank: false, 
-            length: { in: 1...200 }
+  validates :message, presence: true,  
+            length: { in: 1..200, message: "Must be 1 character and maximum 200"}
   validates :created_at, presence: true
 
   validates :likes, numericality: true
@@ -54,7 +55,6 @@ post '/' do
   else
     @errors = shout.errors
     erb :data_not_valid
-    
   end
 
 end
