@@ -89,6 +89,26 @@ get '/handle/:id' do
   erb :handle_user
 end
 
+get '/:id/delete' do
+  @shout = Shout.find(params[:id])
+
+  erb :delete
+end
+
+delete '/:id' do
+  @shout = Shout.find(params[:id])
+  @user = User.find_by_password(params[:password])
+  @shout.user_id = @user.id
+
+  if @user 
+    @shout.destroy    
+    redirect '/'
+  else
+    redirect '/'
+  end
+
+end
+
 private
 def decrement
   update_attributes(:likes => likes - 1)

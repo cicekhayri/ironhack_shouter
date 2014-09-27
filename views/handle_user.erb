@@ -3,6 +3,6 @@
 <% for shout in @shout %>
   <ul class="ul-one">
     <li><%= shout.message %></li>
-    <li><br/><small>likes</small> (<%= shout.likes %>) </li>
+    <li><br/><small>likes (<%= shout.likes %>) <a href="/<%= shout.id %>/delete">Delete this message</a></small></li>
   </ul>
 <% end %>
