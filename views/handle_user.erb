@@ -1,5 +1,8 @@
 <h1><%= @user.handle %></h1>
 
 <% for shout in @shout %>
-  <%= shout.message %><br/>
+  <ul class="ul-one">
+    <li><%= shout.message %></li>
+    <li><br/><small>likes</small> (<%= shout.likes %>) </li>
+  </ul>
 <% end %>
