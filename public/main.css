@@ -37,3 +37,19 @@ form {
   overflow: hidden;
   width: 660px;
 }
+
+ul {
+    float:left;
+    clear:right;
+    padding:10px;
+    width: 600px;
+    list-style: none;
+    margin-bottom: -10px;
+}
+li {
+    float:left;
+    clear:left;
+}
+.ul-one {
+    background-color:#ccc;
+}

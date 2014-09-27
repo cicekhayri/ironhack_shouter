@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 end
 
 class Shout < ActiveRecord::Base
-  belongs_to :users
+  belongs_to :user
 
   validates :message, presence: true, allow_nil: false, allow_blank: false, 
             length: { in: 1...200 }
@@ -29,6 +29,7 @@ end
 
 get '/' do
   @shout = Shout.order(id: :desc)
+  @user = User.all
   
   erb :index
 end

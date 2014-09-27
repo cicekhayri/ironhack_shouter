@@ -8,7 +8,10 @@
 </form>
 
 
-
 <% @shout.each do |shout| %>
-  <%= shout.message %>
+  <ul class="ul-one">
+    <li><strong><%= shout.user.name %></strong> <small>@<%= shout.user.handle %> . <%= shout.created_at.strftime("%d %b") %></small></li>
+    <li><%= shout.message %></li>
+</ul>
 <% end %>
+
