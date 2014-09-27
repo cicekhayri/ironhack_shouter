@@ -47,7 +47,7 @@ post '/' do
   shout.created_at = Time.now
   shout.message = params[:text]
   user = User.find_by_password(params[:password])
-  shout.user_id = user.id
+  shout.user = user
   shout.likes = 0
 
   if shout.save
