@@ -1,0 +1,39 @@
+body {
+  color: #333;
+  font-size: 14;
+  font-style: "Genova";
+  margin: 0 auto;
+  background: #fff;
+  width: 900px;
+}
+
+input[type=text] {
+  border-radius: 5px;
+  font: 16px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  width: 400px;
+  height: 30px;
+}
+
+input[type=password] {
+  border-radius: 5px;
+  font: 16px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  width: 100px;
+  height: 30px;
+}
+
+button {
+  border-radius: 5px;
+  font: 16px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  width: 90px;
+  height: 30px;
+}
+
+form {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  width: 660px;
+}
