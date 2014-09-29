@@ -32,6 +32,7 @@ class Shout < ActiveRecord::Base
   validates :created_at, presence: true
 
   validates :likes, numericality: true
+  
 
 end
 
